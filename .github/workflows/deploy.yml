@@ -31,6 +31,7 @@ jobs:
 
   PROD:
     if: github.ref == 'refs/heads/main'
+    environment: prod
     runs-on: ubuntu-latest
 
     steps:
