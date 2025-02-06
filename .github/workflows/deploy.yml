@@ -8,10 +8,31 @@ on:
     branches:
       - main
 jobs:
-  deploy:
+  CI:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    name: Build and Deploy Job PROD
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Set environment variables
+      run: echo "NEXT_PUBLIC_SITE_URL=http://rocha.com.co" >> $GITHUB_ENV
+
+    - name: Build project
+      run: npm run build
+
+  PROD:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
