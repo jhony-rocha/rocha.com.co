@@ -1,4 +1,4 @@
-name: Deploy Portfolio to S3
+name: Deploy personal website to AWS Amplify
 
 on:
   push:
@@ -7,58 +7,54 @@ on:
   pull_request:
     branches:
       - main
+
+env:
+  NEXT_PUBLIC_SITE_URL: http://rocha.com.co
+
 jobs:
   CI:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Set environment variables
-      run: echo "NEXT_PUBLIC_SITE_URL=http://rocha.com.co" >> $GITHUB_ENV
+      - name: Set environment variables
+        run: echo "NEXT_PUBLIC_SITE_URL=${{ env.NEXT_PUBLIC_SITE_URL }}" >> $GITHUB_ENV
 
-    - name: Build project
-      run: npm run build
-
+      - name: Build project
+        run: npm run build
+  
   PROD:
     needs: CI
-    # if: github.ref == 'refs/heads/main'
-    environment: prod
     runs-on: ubuntu-latest
-
+    environment: prod
+    # if: github.ref == 'refs/heads/main'
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Set environment variables
-      run: echo "NEXT_PUBLIC_SITE_URL=http://rocha.com.co" >> $GITHUB_ENV
+      - name: Set environment variables
+        run: echo "NEXT_PUBLIC_SITE_URL=${{ env.NEXT_PUBLIC_SITE_URL }}" >> $GITHUB_ENV
 
-    - name: Build project
-      run: npm run build
-
-    - name: Deploy to S3
-      uses: aws-actions/configure-aws-credentials@v3
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
-        aws-region: us-east-1
-
-    - name: Sync S3 bucket
-      run: aws s3 sync .next/ s3://rocha.com.co --delete
+      - name: Trigger Amplify Deployment
+        run: |
+          curl -X POST \
+          -H "Authorization: ${{ secrets.AMPLIFY_DEPLOY_TOKEN }}" \
+          https://us-east-1.console.aws.amazon.com/amplify/home/app/d1cvenh8kb41co/branch/main/deploy
