@@ -10,6 +10,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    name: Build and Deploy Job PROD
 
     steps:
     - name: Checkout code
@@ -22,6 +23,9 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+
+    - name: Set environment variables
+      run: echo "NEXT_PUBLIC_SITE_URL=http://rocha.com.co" >> $GITHUB_ENV
 
     - name: Build project
       run: npm run build
