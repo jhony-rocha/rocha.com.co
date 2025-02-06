@@ -61,4 +61,4 @@ jobs:
         aws-region: us-east-1
 
     - name: Sync S3 bucket
-      run: aws s3 sync dist/ s3://rocha.com.co --delete
+      run: aws s3 sync .build/ s3://rocha.com.co --delete
