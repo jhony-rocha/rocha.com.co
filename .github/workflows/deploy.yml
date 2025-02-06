@@ -30,6 +30,7 @@ jobs:
       run: npm run build
 
   PROD:
+    needs: CI
     if: github.ref == 'refs/heads/main'
     environment: prod
     runs-on: ubuntu-latest
