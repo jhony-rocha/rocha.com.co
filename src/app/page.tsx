@@ -46,6 +46,25 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
+function PhoneIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        d="M4.75 4.75a2 2 0 0 1 2-2h2.5a1 1 0 0 1 1 .82l.35 1.74a1 1 0 0 1-.28.9l-1.54 1.54a12.083 12.083 0 0 0 6.32 6.32l1.54-1.54a1 1 0 0 1 .9-.28l1.74.35a1 1 0 0 1 .82 1v2.5a2 2 0 0 1-2 2h-1c-7.18 0-13-5.82-13-13v-1Z"
+        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+      />
+    </svg>
+  )
+}
+
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg
@@ -118,13 +137,21 @@ function Newsletter() {
     >
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <MailIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Stay up to date</span>
+        <span className="ml-3">Contact me</span>
       </h2>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Get notified when I publish something new, and unsubscribe at any time.
+        jhony.alexander.rocha@gmail.com.
+      </p>
+      <br />
+      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <PhoneIcon className="h-6 w-6 flex-none" />
+        <span className="ml-3">Call me</span>
+      </h2>
+      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        +57 312 8863760
       </p>
       <div className="mt-6 flex">
-        <input
+        {/* <input
           type="email"
           placeholder="Email address"
           aria-label="Email address"
@@ -133,7 +160,7 @@ function Newsletter() {
         />
         <Button type="submit" className="ml-4 flex-none">
           Join
-        </Button>
+        </Button> */}
       </div>
     </form>
   )
