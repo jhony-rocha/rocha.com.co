@@ -46,6 +46,25 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
+function PhoneIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        d="M4.75 4.75a2 2 0 0 1 2-2h2.5a1 1 0 0 1 1 .82l.35 1.74a1 1 0 0 1-.28.9l-1.54 1.54a12.083 12.083 0 0 0 6.32 6.32l1.54-1.54a1 1 0 0 1 .9-.28l1.74.35a1 1 0 0 1 .82 1v2.5a2 2 0 0 1-2 2h-1c-7.18 0-13-5.82-13-13v-1Z"
+        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+      />
+    </svg>
+  )
+}
+
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg
@@ -118,13 +137,21 @@ function Newsletter() {
     >
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         <MailIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Stay up to date</span>
+        <span className="ml-3">Contact me</span>
       </h2>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Get notified when I publish something new, and unsubscribe at any time.
+        jhony.alexander.rocha@gmail.com.
+      </p>
+      <br />
+      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <PhoneIcon className="h-6 w-6 flex-none" />
+        <span className="ml-3">Call me</span>
+      </h2>
+      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        +57 312 8863760
       </p>
       <div className="mt-6 flex">
-        <input
+        {/* <input
           type="email"
           placeholder="Email address"
           aria-label="Email address"
@@ -133,7 +160,7 @@ function Newsletter() {
         />
         <Button type="submit" className="ml-4 flex-none">
           Join
-        </Button>
+        </Button> */}
       </div>
     </form>
   )
@@ -273,30 +300,42 @@ export default async function Home() {
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Software designer, founder, and amateur astronaut.
+            Software architect, founder, and explorer of nature.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I’m Spencer, a software designer and entrepreneur based in New York
-            City. I’m the founder and CEO of Planetaria, where we develop
-            technologies that empower regular people to explore space on their
-            own terms.
+            I’m Jhony, a software architect and entrepreneur based in Garagoa, Boyacá, Colombia. 
+            I’m the co-founder and COO of Tropical Media, where we help businesses grow their 
+            brands and develop technological solutions that enable individuals and companies 
+            to bring their projects to life and strengthen their businesses.
           </p>
           <div className="mt-6 flex gap-6">
-            <SocialLink href="#" aria-label="Follow on X" icon={XIcon} />
+            {/* <SocialLink 
+              href="#" 
+              aria-label="Follow on X" 
+              icon={XIcon} 
+              target="_blank"
+              rel="noopener noreferrer"
+            />
             <SocialLink
               href="#"
               aria-label="Follow on Instagram"
               icon={InstagramIcon}
-            />
+              target="_blank"
+              rel="noopener noreferrer"
+            /> */}
             <SocialLink
-              href="#"
+              href="https://github.com/jhony-rocha"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
+              target="_blank"
+              rel="noopener noreferrer"
             />
             <SocialLink
-              href="#"
+              href="https://www.linkedin.com/in/jhony-rocha"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
+              target="_blank"
+              rel="noopener noreferrer"
             />
           </div>
         </div>
@@ -304,14 +343,14 @@ export default async function Home() {
       <Photos />
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
+          {/* <div className="flex flex-col gap-16">
             {articles.map((article) => (
               <Article key={article.slug} article={article} />
             ))}
-          </div>
+          </div> */}
           <div className="space-y-10 lg:pl-16 xl:pl-24">
             <Newsletter />
-            <Resume />
+            {/* <Resume /> */}
           </div>
         </div>
       </Container>
