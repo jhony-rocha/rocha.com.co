@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  NEXT_PUBLIC_SITE_URL: http://rocha.com.co
+  NEXT_PUBLIC_SITE_URL: https://rocha.com.co
 
 jobs:
   CI:
@@ -37,7 +37,7 @@ jobs:
     needs: CI
     runs-on: ubuntu-latest
     environment: prod
-    # if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -53,8 +53,8 @@ jobs:
       - name: Set environment variables
         run: echo "NEXT_PUBLIC_SITE_URL=${{ env.NEXT_PUBLIC_SITE_URL }}" >> $GITHUB_ENV
 
-      - name: Trigger Amplify Deployment
-        run: |
-          curl -X POST \
-          -H "Authorization: ${{ secrets.AMPLIFY_DEPLOY_TOKEN }}" \
-          https://us-east-1.console.aws.amazon.com/amplify/home/app/d1cvenh8kb41co/branch/main/deploy
+      # - name: Trigger Amplify Deployment
+      #   run: |
+      #     curl -X POST \
+      #     -H "Authorization: ${{ secrets.AMPLIFY_DEPLOY_TOKEN }}" \
+      #     https://us-east-1.console.aws.amazon.com/amplify/home/app/d1cvenh8kb41co/branch/main/deploy
