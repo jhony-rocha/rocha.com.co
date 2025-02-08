@@ -10,7 +10,7 @@ on:
 
 env:
   NEXT_PUBLIC_SITE_URL: https://rocha.com.co
-
+  NAME_DEVELOP: Jhony Alexander Rocha Avendaño
 jobs:
   CI:
     runs-on: ubuntu-latest
