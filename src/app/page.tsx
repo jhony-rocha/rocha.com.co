@@ -140,7 +140,7 @@ function Newsletter() {
         <span className="ml-3">Contact me</span>
       </h2>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        jhony.rocha@com.co
+        jhony@rocha.com.co
       </p>
       <br />
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
