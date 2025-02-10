@@ -1,16 +1,13 @@
 name: Deploy personal website to AWS Amplify
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
 
 env:
   NEXT_PUBLIC_SITE_URL: https://rocha.com.co
-  NAME_DEVELOP: Jhony Alexander Rocha Avendaño
+  NAME_DEVELOP: Jhony Rocha
 jobs:
   CI:
     runs-on: ubuntu-latest
@@ -30,25 +27,8 @@ jobs:
       - name: Set environment variables
         run: echo "NEXT_PUBLIC_SITE_URL=${{ env.NEXT_PUBLIC_SITE_URL }}" >> $GITHUB_ENV
 
-      - name: Build project
+      - name: Run tests 🧪
+        run: npm test
+
+      - name: Build project 🏗️
         run: npm run build
-  
-  PROD:
-    needs: CI
-    runs-on: ubuntu-latest
-    environment: prod
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Set environment variables
-        run: echo "NEXT_PUBLIC_SITE_URL=${{ env.NEXT_PUBLIC_SITE_URL }}" >> $GITHUB_ENV
