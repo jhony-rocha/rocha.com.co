@@ -13,22 +13,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout code 🏁
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Setup Node.js 🏗️
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Install dependencies
+      - name: Install dependencies 🔄
         run: npm install
 
-      - name: Set environment variables
-        run: echo "NEXT_PUBLIC_SITE_URL=${{ env.NEXT_PUBLIC_SITE_URL }}" >> $GITHUB_ENV
+      - name: Set environment variables 🏗️
+        run: |
+          echo "NEXT_PUBLIC_SITE_URL=${{ env.NEXT_PUBLIC_SITE_URL }}" >> $GITHUB_ENV
+          echo "NAME_DEVELOP=${{ env.NAME_DEVELOP }}" >> $GITHUB_ENV
 
       - name: Run tests 🧪
         run: npm test
 
-      - name: Build project 🏗️
+      - name: Build project 🔥
         run: npm run build
+
+      - name: Start application 🚀
+        run: npm run start &
+
+      - name: Wait for application to be ready ⏳
+        run: npx wait-on http://localhost:3000
+
+      - name: Install Cypress 🔄
+        run: npx cypress install
+
+      - name: Run Cypress E2E tests 🧪
+        run: npx cypress run
+        env:
+          CI: true
+
+      - name: Upload Cypress Videos & Screenshots 📊
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-results
+          path: cypress/videos/
