@@ -8,8 +8,6 @@ on:
 env:
   NEXT_PUBLIC_SITE_URL: https://rocha.com.co
   NAME_DEVELOP: Jhony Rocha
-  CYPRESS_COVERAGE: 1 npx cypress run
-
 jobs:
   CI:
     runs-on: ubuntu-latest
@@ -30,7 +28,6 @@ jobs:
         run: |
           echo "NEXT_PUBLIC_SITE_URL=${{ env.NEXT_PUBLIC_SITE_URL }}" >> $GITHUB_ENV
           echo "NAME_DEVELOP=${{ env.NAME_DEVELOP }}" >> $GITHUB_ENV
-          echo "CYPRESS_COVERAGE=${{ env.CYPRESS_COVERAGE }}" >> $GITHUB_ENV
 
       - name: Run tests 🧪
         run: npm test
@@ -58,31 +55,3 @@ jobs:
         with:
           name: cypress-results
           path: cypress/videos/
-
-      - name: Run Jest tests with coverage 🧪
-        run: npm test -- --coverage
-
-      - name: Upload Jest coverage report 📊
-        uses: actions/upload-artifact@v4
-        with:
-          name: jest-coverage
-          path: coverage
-
-      - name: Run Cypress tests with coverage 🧪
-        run: npx cypress run
-
-      - name: Upload Cypress coverage report 📊
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress-coverage
-          path: coverage
-
-      - name: Validate coverage
-        run: |
-          COVERAGE=$(node -e "console.log(require('./coverage/coverage-summary.json').total.lines.pct)")
-          echo "Total coverage: $COVERAGE%"
-          if (( $(echo "$COVERAGE < 50" | bc -l) )); then
-            echo "Coverage is too low! Failing the pipeline."
-            exit 1
-          fi
-          

@@ -1,6 +1,6 @@
-import rehypePrism from '@mapbox/rehype-prism';
-import nextMDX from '@next/mdx';
-import remarkGfm from 'remark-gfm';
+import rehypePrism from '@mapbox/rehype-prism'
+import nextMDX from '@next/mdx'
+import remarkGfm from 'remark-gfm'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -10,21 +10,7 @@ const nextConfig = {
       '/articles/*': ['./src/app/articles/**/*.mdx'],
     },
   },
-  webpack: (config, { dev, isServer }) => {
-    if (!isServer && process.env.CYPRESS_COVERAGE) {
-      config.module.rules.push({
-        test: /\.[jt]sx?$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: ['istanbul'],
-          },
-        },
-      });
-    }
-    return config;
-  },
-};
+}
 
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
@@ -32,6 +18,6 @@ const withMDX = nextMDX({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [rehypePrism],
   },
-});
+})
 
-export default withMDX(nextConfig);
+export default withMDX(nextConfig)

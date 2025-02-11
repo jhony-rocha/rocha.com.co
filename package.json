@@ -35,11 +35,9 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@cypress/code-coverage": "^3.13.11",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@types/jest": "^29.5.14",
-    "babel-plugin-istanbul": "^7.0.0",
     "cypress": "^14.0.2",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4",
