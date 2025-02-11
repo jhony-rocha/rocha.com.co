@@ -29,8 +29,14 @@ jobs:
           echo "NEXT_PUBLIC_SITE_URL=${{ env.NEXT_PUBLIC_SITE_URL }}" >> $GITHUB_ENV
           echo "NAME_DEVELOP=${{ env.NAME_DEVELOP }}" >> $GITHUB_ENV
 
-      - name: Run tests 🧪
-        run: npm test
+      - name: Run Jest tests with coverage 🧪
+        run: npm test -- --coverage
+
+      - name: Upload Jest coverage report 📊
+        uses: actions/upload-artifact@v4
+        with:
+          name: jest-coverage
+          path: coverage        
 
       - name: Build project 🔥
         run: npm run build
